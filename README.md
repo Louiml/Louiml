@@ -11,5 +11,5 @@
       <img src="https://lanyard.cnrad.dev/api/782591039256920074"/>
 </p>
 <p align="center">
- <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=loui-dev&langs_count=30"/>
+ <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=loui-dev&langs_count=30&theme=dracula"/>
  </p>
