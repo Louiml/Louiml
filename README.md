@@ -8,7 +8,7 @@
 <p>on Tiktok <a><img src="https://cdn.discordapp.com/avatars/782591039256920074/6a563b0be30e6916bb15eaa156bd1c63.webp?size=24">Soon...</a></p>
 </div>
 <p align="center"><br>
-<a href="https://cdn.discordapp.com/attachments/975763215772442715/1008204223978156082/louisdiscordapi.png">
+<a href="https://discord.com/users/782591039256920074">
       <img src="https://cdn.discordapp.com/attachments/975763215772442715/1008204223978156082/louisdiscordapi.png?size=4096"/>
       </a>
 </p>
