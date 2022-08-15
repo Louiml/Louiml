@@ -13,5 +13,5 @@
       </a>
 </p>
 <p align="center">
- <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=loui-dev&langs_count=30&theme=dracula"/>
+ <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=louiml-net&langs_count=30&theme=dracula"/>
  </p>
