@@ -13,7 +13,7 @@
 </div>
 <p align="center"><br>
 <a href="https://discord.com/users/782591039256920074">
-      <img src="https://cdn.discordapp.com/attachments/1007642731226603562/1010466837714178059/bbbbsbbbbbbbbbbbbbbbbbbbbbbbbb.png"/>
+      <img src="https://cdn.discordapp.com/attachments/1007642731226603562/1010758887860862996/apidiscordimage.png?size=4096"/>
       </a>
 </p>
 <p align="center">
