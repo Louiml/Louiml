@@ -20,7 +20,7 @@
 <h1>do you want to start your own business?</h1>
 <p>if yes its the time to get to know "yourbusiness"</p>
 <p>"yourbusiness" that's the new ui websiter is build your own website with Vue and "yourbusiness" give try learning programming with louiml's languages</p>
-<a href="http://yourbusinesses.net/">Website</a>
+<a href="http://yourbusinesses.net/">Website</a><p></p>
 <a href="https://github.com/your-business/">Github/your-business</a>
 <h3>People(s):</h3>
 <div>
