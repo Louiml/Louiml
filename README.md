@@ -5,21 +5,14 @@
 </div>
 <h4 align="center">hi my name is loui, and i'm programming at: c, c#, c++, vb, ruby, go, swift, html, css, javascript, typescript, coffeescript, lua, .net, python, java, kotlin, vue, f#, a++, bash, shell, c--, c*, dart, elixir, haxe.</h4>
 <p style="color: black" align="center">i'm created programming languages they are called: Cpoint, Zero, ZapScript.</p>
-<h5 align="center">need help with programming? you can talk to me on Discord <a href="https://discord.com/users/782591039256920074"><img src="https://cdn.discordapp.com/avatars/782591039256920074/6a563b0be30e6916bb15eaa156bd1c63.webp?size=24">Loui</a></h5>
+<h5 align="center">need help with programming? you can talk to me on Discord <a href="https://discord.com/users/1019290805963329587"><img src="https://cdn.discordapp.com/avatars/782591039256920074/6a563b0be30e6916bb15eaa156bd1c63.webp?size=24">louiml</a></h5>
 <h1></h1>
 <h1 align="center">where can be found me?</h1>
 <div align="center">
-<p>on Discord: <a href="https://discord.com/users/782591039256920074"><img src="https://cdn.discordapp.com/avatars/782591039256920074/6a563b0be30e6916bb15eaa156bd1c63.webp?size=24">Loui</a></p>
+<p>on Discord: <a href="https://discord.com/users/1019290805963329587"><img src="https://cdn.discordapp.com/avatars/782591039256920074/6a563b0be30e6916bb15eaa156bd1c63.webp?size=24">louiml</a></p>
 <p>on Twitter <a href="https://twitter.com/louiml_net"><img src="https://cdn.discordapp.com/avatars/782591039256920074/6a563b0be30e6916bb15eaa156bd1c63.webp?size=24">louiml_net</a></p>
 <p>on Tiktok <a><img src="https://cdn.discordapp.com/avatars/782591039256920074/6a563b0be30e6916bb15eaa156bd1c63.webp?size=24">Soon...</a></p>
 </div>
-<h1></h1>
-<h1 align="center">My discord profile</h1>
-<p align="center"><br>
-<a href="https://discord.com/users/782591039256920074">
-      <img src="https://cdn.discordapp.com/attachments/996872631573823491/1013861471962267648/unknown.png"/>
-      </a>
-</p>
 <h1></h1>
 <div align="center">
 <h1>do you want to start your own business?</h1>
