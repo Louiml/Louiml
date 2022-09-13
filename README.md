@@ -23,11 +23,11 @@
 <h3>People(s):</h3>
 <div>
 <a href="https://github.com/XSharp-69"><img src="https://avatars.githubusercontent.com/u/96888411?s=70&v=4">XSharp-69</a>
-<a href="https://github.com/louiml-net"><img src="https://avatars.githubusercontent.com/u/99025570?s=70&v=4">louiml-net</a>
+<a href="https://github.com/louiml"><img src="https://avatars.githubusercontent.com/u/99025570?s=70&v=4">louiml</a>
 </div>
 </div>
 <h1></h1>
 <p align="center">
- <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=louiml-net&langs_count=40&theme=dark"/>
+ <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=louiml&langs_count=40&theme=dark"/>
  </p>
 <h1></h1>
