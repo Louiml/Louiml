@@ -27,7 +27,9 @@
 </div>
 </div>
 <h1></h1>
+<!--
 <p align="center">
  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=louiml-net&langs_count=40&theme=dark"/>
  </p>
 <h1></h1>
+-->
