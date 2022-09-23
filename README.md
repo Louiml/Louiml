@@ -3,7 +3,7 @@
 <img src="https://readme-typing-svg.herokuapp.com?font=Impact&size=21&duration=5015&pause=1000&color=FFFFFFFF&center=true&vCenter=true&multiline=true&width=435&lines=hey%2C+welcome+to+my+github"/>
 <h1></h1>
 </div>
-<h4 align="center">hi my name is loui, and i'm programming at: c, c#, c++, vb, ruby, go, swift, html, css, javascript, typescript, coffeescript, lua, .net, python, java, kotlin, vue, f#, a++, bash, shell, c--, c*, dart, elixir, haxe.</h4>
+<h4 align="center">hi my name is loui, and i'm programming at: c, c#, c++, vb, ruby, go, swift, html, css, javascript, typescript, coffeescript, lua, .net, python, java, kotlin, vue, f#, a++, bash, shell, brainfuck, lolcode, binaryfuck, c*, dart, elixir, haxe.</h4>
 <p style="color: black" align="center">i'm created programming languages they are called: Cpoint, Zero, ZapScript.</p>
 <h5 align="center">need help with programming? you can talk to me on Discord <a href="https://discord.com/users/1019290805963329587"><img src="https://cdn.discordapp.com/avatars/782591039256920074/6a563b0be30e6916bb15eaa156bd1c63.webp?size=24">louiml</a></h5>
 <h1></h1>
