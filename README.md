@@ -23,7 +23,7 @@
 <h3>People(s):</h3>
 <div>
 <a href="https://github.com/XSharp-69"><img src="https://avatars.githubusercontent.com/u/96888411?s=70&v=4">XSharp-69</a>
-<a href="https://github.com/louiml"><img src="https://avatars.githubusercontent.com/u/99025570?v=4">louiml</a>
+<a href="https://github.com/louiml"><img src="https://cdn.discordapp.com/avatars/1019290805963329587/8ed90930f4460dc8319847dcb1d609e1.webp?size=80">louiml</a>
 </div>
 </div>
 <h1></h1>
