@@ -5,13 +5,13 @@
 </div>
 <h4 align="center">hi my name is loui, and i'm programming at: c, c#, c++, vb, ruby, go, swift, html, css, javascript, typescript, coffeescript, lua, python, java, kotlin, vue, f#, a++, bash, shell, brainfuck, lolcode, binaryfuck, c*, dart, elixir, haxe.</h4>
 <p style="color: black" align="center">i'm created programming languages they are called: Cpoint, Zero, ZapScript.</p>
-<h5 align="center">need help with programming? you can talk to me on Discord <a href="https://discord.com/users/1019290805963329587"><img src="https://avatars.githubusercontent.com/u/99025570?v=4?size=24">BrainerG</a></h5>
+<h5 align="center">need help with programming? you can talk to me on Discord <a href="https://discord.com/users/1019290805963329587"><img src="https://cdn.discordapp.com/avatars/1019290805963329587/8ed90930f4460dc8319847dcb1d609e1.webp?size=24">BrainerG</a></h5>
 <h1></h1>
 <h1 align="center">where can be found me?</h1>
 <div align="center">
-<p>on Discord: <a href="https://discord.com/users/1019290805963329587"><img src="https://cdn.discordapp.com/avatars/782591039256920074/6a563b0be30e6916bb15eaa156bd1c63.webp?size=24">BrainerG</a></p>
-<p>on Twitter <a href="https://twitter.com/louiml_net"><img src="https://cdn.discordapp.com/avatars/782591039256920074/6a563b0be30e6916bb15eaa156bd1c63.webp?size=24">louiml_net</a></p>
-<p>on Tiktok <a><img src="https://cdn.discordapp.com/avatars/782591039256920074/6a563b0be30e6916bb15eaa156bd1c63.webp?size=24">Soon...</a></p>
+<p>on Discord: <a href="https://discord.com/users/1019290805963329587"><img src="https://cdn.discordapp.com/avatars/1019290805963329587/8ed90930f4460dc8319847dcb1d609e1.webp?size=24">BrainerG</a></p>
+<p>on Twitter <a href="https://twitter.com/louiml_net"><img src="https://cdn.discordapp.com/avatars/1019290805963329587/8ed90930f4460dc8319847dcb1d609e1.webp?size=24">louiml_net</a></p>
+<p>on Tiktok <a><img src="https://cdn.discordapp.com/avatars/1019290805963329587/8ed90930f4460dc8319847dcb1d609e1.webp?size=24">Soon...</a></p>
 </div>
 <h1></h1>
 <div align="center">
