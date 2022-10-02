@@ -9,7 +9,7 @@
 <h1></h1>
 <h1 align="center">where can be found me?</h1>
 <div align="center">
-<p>on Discord: <a href="https://discord.com/users/1019290805963329587"><img src="https://cdn.discordapp.com/avatars/1019290805963329587/8ed90930f4460dc8319847dcb1d609e1.webp?size=24">BrainerG</a></p>
+<p>on Discord: <a href="https://discord.com/users/1019290805963329587"><img src="https://cdn.discordapp.com/avatars/1019290805963329587/8ed90930f4460dc8319847dcb1d609e1.webp?size=24">xplusbrain</a></p>
 <p>on Twitter <a href="https://twitter.com/louiml_net"><img src="https://cdn.discordapp.com/avatars/1019290805963329587/8ed90930f4460dc8319847dcb1d609e1.webp?size=24">louiml_net</a></p>
 <p>on Tiktok <a><img src="https://cdn.discordapp.com/avatars/1019290805963329587/8ed90930f4460dc8319847dcb1d609e1.webp?size=24">Soon...</a></p>
 </div>
