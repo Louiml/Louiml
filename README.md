@@ -4,8 +4,8 @@ using namespace std;
 const string name = "Funmmer";
 int main(string onlyyes){
     cout << "Name: " << name << endl;
-    cout << "Learn full C++ programming" << endl;
-    cout << "Learn how to make operating system" << endl;
+    cout << "Learning full C++ programming" << endl;
+    cout << "Learning how to make operating system" << endl;
     system("clear");
     cout << "Download MirixOS? ";
     cin >> onlyyes;
