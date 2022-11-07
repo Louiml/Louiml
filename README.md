@@ -28,4 +28,4 @@ int main(string onlyyes){
 <hr>
 <h3>My IDE soon...</h3>
 <h4>ScreenShot:</h4>
-<img height="350" width="550" src="https://cdn.discordapp.com/attachments/1019291584661041274/1038883066472579092/image.png">
+<img height="350" width="550" src="https://cdn.discordapp.com/attachments/1019291584661041274/1039183038413815990/Screenshot_from_2022-11-07_16-21-38.png">
