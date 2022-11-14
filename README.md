@@ -1,7 +1,7 @@
 ```cpp
 #include <iostream>
 using namespace std;
-const string name = "Funmmer";
+const char* name = "Funmmer";
 int main(string onlyyes){
     cout << "Name: " << name << endl;
     cout << "Learning full C++ programming" << endl;
