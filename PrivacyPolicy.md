@@ -1,12 +1,10 @@
-Sure, here is a privacy policy for Louiml:
-
 **Louiml Privacy Policy**
 
 Louiml is a company that is developing AI and Help Software. We are currently under development and do not have an official website. We only collect names and email addresses from our customers for the purpose of making content.
 
 We will never sell or share your personal information with third parties. We will only use your personal information to provide you with the services you have requested.
 
-You have the right to request access to your personal information, to have it corrected, or to have it deleted. You can do this by contacting us at [email protected]
+You have the right to request access to your personal information, to have it corrected, or to have it deleted. You can do this by contacting us at support@louiml.net
 
 We take your privacy seriously and will always protect your personal information.
 
