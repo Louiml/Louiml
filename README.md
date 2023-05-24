@@ -4,5 +4,5 @@
   <img src="https://skillicons.dev/icons?i=java,c,cpp,cs,js,ts,assembly&theme=dark" height="50"><img align="left" height="50" src="https://cdn.hackr.io/uploads/topics_svg/1515163329FBBk5SGRAt.svg">
 </div>
 <div align="left">
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=louiml&langs_count=11&theme=dark">
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Louiml&langs_count=11&theme=dark">
 </div>
