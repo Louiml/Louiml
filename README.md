@@ -28,7 +28,7 @@ sequenceDiagram
 ### Processing Time
 The processing time for the entire QHU-GPT process usually ranges from 5 to 60 seconds, depending on the complexity of the request and the length of the generated response.
 In this consolidated format, both Mermaid codes are included in a single piece of code. The first code presents a flowchart representation of the process, while the second code illustrates the sequence of interactions between the user, QHU technology, and the GPT model. The processing time information is also provided at the end. I apologize for any confusion caused earlier and I hope this meets your requirements.
-### How's QHU reads the text?
+### How's QHU reads text?
 ```mermaid
 erDiagram
     REQUEST ||--o{ HOST : API-Starting
