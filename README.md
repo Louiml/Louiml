@@ -2,6 +2,7 @@
 
 # Welcome
 
+---
 ## What I use
 
 #### **Systems & Backend**
@@ -30,10 +31,6 @@
 ---
 #### **Connect With Me**
 
-<p align="center">
-  <a href="https://discord.com/users/1529156667193819369">
-    <img src="https://discord.dog/1529156667193819369.png" width="300" alt="Discord Profile" />
-  </a>
-</p>
+[![Contact with Discord](https://img.shields.io/badge/Discord-4285F4.svg?style=for-the-badge&logo=Discord&logoColor=white)](https://discord.com/users/1529156667193819369)
 
 </div>
