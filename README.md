@@ -27,7 +27,13 @@
 [![Adobe Photoshop](https://img.shields.io/badge/adobe%20photoshop-%2331A8FF.svg?style=for-the-badge&logo=adobephotoshop&logoColor=white)](https://www.adobe.com/products/photoshop.html)
 [![Adobe Premiere Pro](https://img.shields.io/badge/adobe%20premiere%20pro-%239999FF.svg?style=for-the-badge&logo=adobepremierepro&logoColor=white)](https://www.adobe.com/products/premiere.html)
 [![Gemini Nano Banana](https://img.shields.io/badge/Gemini%20Nano%20Banana-4285F4.svg?style=for-the-badge&logo=google%20gemini&logoColor=white)](https://gemini.google)
+
 ---
+
+Currently working on **Ryuzaki**, a software for OSINT and Recon tailored for both cybersecurity beginners and seasoned professionals. [Wanna learn more?](https://ryuzaki.agamiz.com)
+
+---
+
 #### **Connect With Me**
 
 [![Contact with Discord](https://img.shields.io/badge/Discord-4285F4.svg?style=for-the-badge&logo=Discord&logoColor=white)](https://discord.com/users/1529156667193819369)
