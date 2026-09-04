@@ -1,6 +1,6 @@
 <div align="center">
 
-# Welcome
+# Hi I'm Louiml🤗
 
 ## What I use
 
@@ -19,11 +19,14 @@
 #### **Tools & Environment**
 [![Git](https://img.shields.io/badge/git-%23F05032.svg?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com)
 [![Linux](https://img.shields.io/badge/Linux-%23FCC624.svg?style=for-the-badge&logo=linux&logoColor=black)](https://www.linux.org)
-[![RustRover](https://img.shields.io/badge/RustRover-E3AF2D?style=for-the-badge&logo=rustrover&logoColor=white)](https://www.jetbrains.com/rustrover/)
+[![Fleet](https://img.shields.io/badge/Fleet-000000.svg?style=for-the-badge&logo=jetbrains&logoColor=white)](https://www.jetbrains.com/fleet/)
+[![RustRover](https://img.shields.io/badge/RustRover-E3AF2D?style=for-the-badge&logo=jetbrains&logoColor=white)](https://www.jetbrains.com/rustrover/)
 [![WebStorm](https://img.shields.io/badge/WebStorm-0090FF.svg?style=for-the-badge&logo=webstorm&logoColor=white)](https://www.jetbrains.com/webstorm/)
-[![OpenCode](https://img.shields.io/badge/OpenCode-34373B.svg?style=for-the-badge&logo=code&logoColor=white)](https://opencode.ai)
+[![OpenCode](https://img.shields.io/badge/OpenCode-34373B.svg?style=for-the-badge&logo=opencode&logoColor=white)](https://opencode.ai)
+[![Unreal Engine](https://img.shields.io/badge/unreal%20engine-%23313131.svg?style=for-the-badge&logo=unrealengine&logoColor=white)](https://www.unrealengine.com/)
 
 #### **Creative & Media**
+[![Blender](https://img.shields.io/badge/blender-%23E87D0D.svg?style=for-the-badge&logo=blender&logoColor=white)](https://www.blender.org/)
 [![Adobe Photoshop](https://img.shields.io/badge/adobe%20photoshop-%2331A8FF.svg?style=for-the-badge&logo=adobephotoshop&logoColor=white)](https://www.adobe.com/products/photoshop.html)
 [![Adobe Premiere Pro](https://img.shields.io/badge/adobe%20premiere%20pro-%239999FF.svg?style=for-the-badge&logo=adobepremierepro&logoColor=white)](https://www.adobe.com/products/premiere.html)
 [![Gemini Nano Banana](https://img.shields.io/badge/Gemini%20Nano%20Banana-4285F4.svg?style=for-the-badge&logo=google%20gemini&logoColor=white)](https://gemini.google)
