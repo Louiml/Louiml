@@ -1,0 +1,105 @@
+---
+---
+
+<section id="connect" class="connect">
+  <div class="shell">
+    <header class="section-head" data-reveal>
+      <p class="eyebrow">Connect</p>
+      <h2>Say hi.</h2>
+      <p>
+        Discord is the fastest way to reach me. I read everything that lands
+        there and reply to most of it. If it's about Ryuzaki, leading with what
+        you're trying to do gets you a better answer faster.
+      </p>
+    </header>
+
+    <div class="connect-grid">
+      <a
+        class="contact-card card primary"
+        href="https://discord.com/users/1529156667193819369"
+        target="_blank"
+        rel="noopener"
+        data-reveal
+      >
+        <span class="cc-icon discord">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 2.9l-.2.5a14.6 14.6 0 0 1 4.3 2.2 13.4 13.4 0 0 0-11 0 14.5 14.5 0 0 1 4.3-2.2l-.2-.5A19.8 19.8 0 0 0 7.7 4.4 20.3 20.3 0 0 0 4 18.7a19.9 19.9 0 0 0 6 3 14.6 14.6 0 0 0 .9-1.5 12.8 12.8 0 0 1-1.4-.7l.3-.3a14.3 14.3 0 0 0 12.2 0l.4.3a12.8 12.8 0 0 1-1.5.7c.3.5.6 1 .9 1.5a19.9 19.9 0 0 0 6-3 20.3 20.3 0 0 0-3.6-14.3ZM9.5 15.3c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Zm5 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Z"/></svg>
+        </span>
+        <span class="cc-body">
+          <span class="cc-title">Discord</span>
+          <span class="cc-sub">Message me directly</span>
+        </span>
+        <span class="cc-arrow" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </span>
+      </a>
+
+      <a
+        class="contact-card card"
+        href="https://ryuzaki.agamiz.com"
+        target="_blank"
+        rel="noopener"
+        data-reveal
+      >
+        <span class="cc-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </span>
+        <span class="cc-body">
+          <span class="cc-title">Ryuzaki</span>
+          <span class="cc-sub">See what I'm building</span>
+        </span>
+        <span class="cc-arrow" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .connect-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--gap);
+    align-items: stretch;
+  }
+  @media (max-width: 700px) {
+    .connect-grid { grid-template-columns: 1fr; }
+  }
+  .contact-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 26px 26px;
+  }
+  .contact-card.primary {
+    background:
+      radial-gradient(120% 100% at 100% 0%, var(--accent-soft), transparent 55%),
+      var(--bg-raise);
+    border-color: var(--stroke-bright);
+  }
+  .cc-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: var(--bg-raise-2);
+    border: 1px solid var(--stroke);
+    color: var(--text-2);
+    flex: none;
+  }
+  .cc-icon.discord { color: #5865f2; background: rgba(88, 101, 242, 0.12); }
+  .cc-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-right: auto;
+  }
+  .cc-title { font-weight: 600; letter-spacing: -0.01em; }
+  .cc-sub { font-size: 0.9rem; color: var(--text-3); }
+  .cc-arrow {
+    color: var(--text-3);
+    transition: transform 0.3s var(--ease-out), color 0.3s var(--ease-out);
+  }
+  .contact-card:hover .cc-arrow { color: var(--accent); transform: translate(2px, -2px); }
+</style>

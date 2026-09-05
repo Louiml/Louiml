@@ -1,0 +1,20 @@
+# build output
+dist/
+dist.zip
+
+# dependencies
+node_modules/
+
+# astro
+.astro/
+
+# env / local
+.env
+.env.*
+!.env.example
+
+# os / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

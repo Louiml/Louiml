@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Project from '../components/Project.astro';
+import Connect from '../components/Connect.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Louiml portfolio">
+  <Nav />
+  <main>
+    <Hero />
+    <About />
+    <Project />
+    <Connect />
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  import { animate, inView, spring } from 'motion';
+
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const reveal = (el: Element, delay: number) => {
+    if (reduceMotion) {
+      el.removeAttribute('data-reveal');
+      return;
+    }
+    animate(
+      el,
+      { opacity: [0, 1], transform: ['translateY(16px)', 'translateY(0px)'] },
+      { easing: spring({ stiffness: 110, damping: 18, mass: 0.8 }), delay }
+    ).finished.then(() => el.removeAttribute('data-reveal'));
+  };
+
+  // Reveal each [data-reveal] as it enters, staggering siblings within a group.
+  inView('[data-reveal]', (info) => {
+    const el = info.target as HTMLElement;
+    // Stagger direct children of a grid/list that also carry the attribute.
+    const parent = el.parentElement;
+    const siblings =
+      parent && [...parent.children].every((c) => c.hasAttribute('data-reveal'))
+        ? [...parent.children].indexOf(el)
+        : 0;
+    reveal(el, siblings * 0.05);
+  });
+
+  // Subtle parallax on the hero ambient glow. Motion-ok and pointer-fine only.
+  const ambient = document.querySelector('.ambient');
+  const fine = matchMedia('(pointer: fine)').matches;
+  if (ambient && fine && !reduceMotion) {
+    document.addEventListener(
+      'pointermove',
+      (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 26;
+        const y = (e.clientY / window.innerHeight - 0.5) * 18;
+        animate(
+          ambient,
+          { transform: `translate(${x}px, ${y}px)` },
+          { easing: spring({ stiffness: 36, damping: 20 }) }
+        );
+      },
+      { passive: true }
+    );
+  }
+</script>

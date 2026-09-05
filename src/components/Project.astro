@@ -1,0 +1,237 @@
+---
+// Tools that plausibly make up Ryuzaki, drawn from the stack Louiml actually uses.
+const builtWith = [
+  { name: 'Rust', slug: 'rust', color: '#ce422b' },
+  { name: 'Tauri', slug: 'tauri', color: '#ffc131' },
+  { name: 'TypeScript', slug: 'typescript', color: '#3178c6' },
+];
+
+const features = [
+  {
+    title: 'One workspace for OSINT and recon',
+    body:
+      'Recon pulled into a single place, instead of a dozen half-wired scripts that each do one thing.',
+  },
+  {
+    title: 'Built for the full range',
+    body:
+      'Approachable for people learning the field, deep enough to be useful for the ones already in it.',
+  },
+];
+---
+
+<section id="project" class="project">
+  <div class="shell">
+    <header class="section-head" data-reveal>
+      <p class="eyebrow">Featured project</p>
+      <h2>Currently shipping.</h2>
+    </header>
+
+    <article class="feature card" data-reveal>
+      <div class="feature-main">
+        <h2 class="feature-title">Ryuzaki</h2>
+        <p class="feature-lede">
+          OSINT and recon, built for both ends of the room. Ryuzaki lowers the
+          floor for people learning the field and raises the ceiling for the
+          ones already deep in it.
+        </p>
+
+        <ul class="features">
+          {features.map((f) => (
+            <li>
+              <span class="check" aria-hidden="true">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"/></svg>
+              </span>
+              <div>
+                <h4>{f.title}</h4>
+                <p>{f.body}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <div class="feature-cta">
+          <a
+            class="btn btn-primary"
+            href="https://ryuzaki.agamiz.com"
+            target="_blank"
+            rel="noopener"
+          >
+            Read more about Ryuzaki
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+          <span class="tag">
+            <span class="live" aria-hidden="true"></span>In progress
+          </span>
+        </div>
+      </div>
+
+      <aside class="feature-spec glass" data-reveal>
+        <div class="spec-row">
+          <span class="spec-label">Status</span>
+          <span class="spec-value">
+            <span class="live" aria-hidden="true"></span>In progress
+          </span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Focus</span>
+          <span class="spec-value">OSINT &amp; Recon</span>
+        </div>
+        <div class="spec-row stack">
+          <span class="spec-label">Built with</span>
+          <span class="built-with">
+            {builtWith.map((t) => (
+              <span class="pill">
+                <img
+                  src={`https://cdn.simpleicons.org/${t.slug}/${t.color.replace('#', '')}`}
+                  alt=""
+                  width="14"
+                  height="14"
+                  loading="lazy"
+                />
+                {t.name}
+              </span>
+            ))}
+          </span>
+        </div>
+        <a class="spec-link" href="https://ryuzaki.agamiz.com" target="_blank" rel="noopener">
+          ryuzaki.agamiz.com
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </aside>
+    </article>
+  </div>
+</section>
+
+<style>
+  .feature {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 0;
+    overflow: hidden;
+    padding: 0;
+    border-radius: 12px;
+  }
+  @media (max-width: 820px) {
+    .feature { grid-template-columns: 1fr; }
+  }
+  .feature-main {
+    padding: clamp(32px, 5vw, 52px);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .feature-cta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent-soft);
+    background: rgba(232, 192, 122, 0.06);
+    padding: 5px 11px 5px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+  .feature-main .btn { border-radius: 10px; }
+  .live {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+  }
+  .feature-title { margin: 0; }
+  .feature-lede {
+    font-size: 1.125rem;
+    line-height: 1.5;
+    max-width: 50ch;
+  }
+  .features {
+    list-style: none;
+    margin: 8px 0 4px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .features li {
+    display: flex;
+    gap: 13px;
+    align-items: flex-start;
+  }
+  .check {
+    margin-top: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    flex: none;
+  }
+  .features h4 {
+    margin: 0 0 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .features p { margin: 0; font-size: 0.95rem; max-width: 48ch; }
+
+  /* Spec panel. */
+  .feature-spec {
+    border-radius: 0;
+    border: none;
+    border-left: 1px solid var(--stroke);
+    padding: clamp(28px, 4vw, 44px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    background:
+      linear-gradient(180deg, var(--accent-soft), transparent 70%),
+      var(--bg-raise);
+  }
+  @media (max-width: 820px) {
+    .feature-spec { border-left: none; border-top: 1px solid var(--stroke); }
+  }
+  .spec-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .spec-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .spec-value {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+  }
+  .built-with { display: flex; flex-wrap: wrap; gap: 8px; }
+  .built-with .pill { padding: 6px 11px 6px 9px; font-size: 0.84rem; border-radius: 8px; }
+  .spec-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: auto;
+    font-size: 0.95rem;
+    color: var(--text-2);
+    transition: color 0.2s var(--ease-out);
+  }
+  .spec-link:hover { color: var(--accent); }
+</style>

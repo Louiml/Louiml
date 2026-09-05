@@ -1,0 +1,77 @@
+---
+const year = new Date().getFullYear();
+const nav = [
+  { label: 'About', href: '#about' },
+  { label: 'Project', href: '#project' },
+  { label: 'Connect', href: '#connect' },
+];
+---
+
+<footer class="footer">
+  <div class="shell foot-grid">
+    <div class="foot-brand">
+      <a href="#top" class="foot-logo">
+        <span class="dot" aria-hidden="true"></span>Louiml
+      </a>
+      <p class="foot-tag">Systems, interfaces, and the work in between.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Footer">
+      {nav.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+    <div class="foot-meta">
+      <span>&copy; {year} Louiml</span>
+      <span class="muted">Built with Astro. No tracking.</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--stroke);
+    padding-block: 40px 36px;
+    margin-top: 40px;
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  @media (max-width: 700px) {
+    .foot-grid { grid-template-columns: 1fr; gap: 24px; }
+  }
+  .foot-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+  }
+  .foot-tag { font-size: 0.92rem; color: var(--text-3); max-width: 32ch; }
+  .foot-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .foot-nav a {
+    font-size: 0.92rem;
+    color: var(--text-2);
+    transition: color 0.2s var(--ease-out);
+  }
+  .foot-nav a:hover { color: var(--accent); }
+  .foot-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.88rem;
+    color: var(--text-3);
+  }
+  .foot-meta .muted { color: var(--text-3); }
+</style>

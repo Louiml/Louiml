@@ -1,0 +1,207 @@
+/* Design system. Dark, translucent, optical. One shell, one rhythm. */
+
+:root {
+  --bg: #08080a;
+  --bg-raise: rgba(255, 255, 255, 0.04);
+  --bg-raise-2: rgba(255, 255, 255, 0.06);
+  --stroke: rgba(255, 255, 255, 0.08);
+  --stroke-bright: rgba(255, 255, 255, 0.14);
+  --text: #f4f4f6;
+  --text-2: rgba(244, 244, 246, 0.66);
+  --text-3: rgba(244, 244, 246, 0.42);
+  --accent: #e8c07a;
+  --accent-soft: rgba(232, 192, 122, 0.16);
+
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    system-ui, "Segoe UI", sans-serif;
+
+  --radius-xl: 26px;
+  --radius-lg: 18px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --maxw: 1120px;
+  --gutter: clamp(20px, 4vw, 40px);
+  --gap: 20px;
+  --section-y: clamp(5.5rem, 11vh, 8rem);
+  --nav-h: 64px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font: 100%/1.5 var(--font);
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(120% 80% at 82% -10%, rgba(232, 192, 122, 0.09), transparent 58%),
+    radial-gradient(90% 60% at 0% 8%, rgba(120, 140, 255, 0.07), transparent 55%),
+    var(--bg);
+}
+
+::selection { background: var(--accent-soft); color: var(--text); }
+
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; }
+
+/* One shared shell. Every section aligns to this. */
+.shell {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+section {
+  padding-block: var(--section-y);
+  scroll-margin-top: calc(var(--nav-h) + 24px);
+}
+
+/* Type scale. Optical: tighten as it grows. */
+.display {
+  font-size: clamp(3.25rem, 10vw, 7rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  font-optical-sizing: auto;
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+h2 {
+  font-size: clamp(1.85rem, 4.4vw, 2.9rem);
+  line-height: 1.06;
+  letter-spacing: -0.022em;
+  font-weight: 600;
+  margin: 0;
+}
+
+h3 {
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  max-width: 62ch;
+}
+
+/* Standardized section header. Same structure everywhere. */
+.section-head {
+  max-width: 62ch;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+.section-head .eyebrow { margin-bottom: 14px; }
+.section-head p { margin-top: 16px; }
+
+/* Translucent material. */
+.glass {
+  background: var(--bg-raise);
+  backdrop-filter: blur(22px) saturate(170%);
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-lg);
+}
+
+/* Cards. Equal-height ready (flex column inside grid). */
+.card {
+  background: var(--bg-raise);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-lg);
+  transition: transform 0.4s var(--ease-out), border-color 0.3s var(--ease-out),
+    background 0.3s var(--ease-out);
+}
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--stroke-bright);
+  background: var(--bg-raise-2);
+}
+.card:active { transform: translateY(-1px) scale(0.997); }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1px solid var(--stroke);
+  background: var(--bg-raise);
+  transition: transform 0.25s var(--ease-out), background 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out);
+}
+.btn:hover { background: var(--bg-raise-2); border-color: var(--stroke-bright); }
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--text);
+  color: var(--bg);
+  border-color: transparent;
+}
+.btn-primary:hover { background: #fff; }
+
+/* Pills */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 13px 8px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--stroke);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-2);
+  transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+}
+.pill:hover { color: var(--text); border-color: var(--stroke-bright); }
+.pill img { opacity: 0.95; }
+
+/* Reveal on scroll. Springs in JS; this is the initial state. */
+[data-reveal] { opacity: 0; transform: translateY(16px); }
+
+/* Reduced motion: cross-fade, no slides or springs. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal] { opacity: 1; transform: none; }
+  .card, .btn { transition: none; }
+}
+
+/* Reduced transparency: drop the blur, solid surfaces. */
+@media (prefers-reduced-transparency: reduce) {
+  .glass, .card, .btn, .pill { backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+
+/* Higher contrast: near-solid backgrounds, stronger strokes. */
+@media (prefers-contrast: more) {
+  :root {
+    --bg-raise: rgba(255, 255, 255, 0.07);
+    --stroke: rgba(255, 255, 255, 0.2);
+    --text-2: rgba(244, 244, 246, 0.82);
+  }
+}
