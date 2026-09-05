@@ -37,7 +37,7 @@
 <div align="center">
 <img src="./rak.svg" width="160" alt="Rak">
 
-**Check out my programming language that my friend and I are building** — [Rak](https://github.com/Louiml/Rak) 🚀
+**Check out my programming language that my friend and I are working on** [Rak](https://github.com/Louiml/Rak) 🚀
 </div>
 
 ---
