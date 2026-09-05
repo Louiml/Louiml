@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="84" viewBox="0 0 260 84" role="img" aria-label="Rak">
+  <rect width="260" height="84" rx="16" fill="#0a0a0a"/>
+  <rect x="2" y="2" width="256" height="80" rx="14" fill="none" stroke="#22C55E" stroke-width="1.5" opacity="0.5"/>
+  <text x="130" y="55" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="42" font-weight="700" fill="#22C55E" text-anchor="middle" letter-spacing="2">Rak</text>
+</svg>

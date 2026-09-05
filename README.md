@@ -5,6 +5,7 @@
 ## What I use
 
 #### **Systems & Backend**
+[![Rak](https://img.shields.io/badge/Rak-v0.2.0-22C55E?style=for-the-badge&logoColor=white)](https://github.com/Louiml/Rak)
 [![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white)](https://www.rust-lang.org)
 [![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2++&logoColor=white)](https://isocpp.org)
 [![Tauri](https://img.shields.io/badge/tauri-%2324C8DB.svg?style=for-the-badge&logo=tauri&logoColor=black)](https://tauri.app)
@@ -30,6 +31,14 @@
 [![Adobe Photoshop](https://img.shields.io/badge/adobe%20photoshop-%2331A8FF.svg?style=for-the-badge&logo=adobephotoshop&logoColor=white)](https://www.adobe.com/products/photoshop.html)
 [![Adobe Premiere Pro](https://img.shields.io/badge/adobe%20premiere%20pro-%239999FF.svg?style=for-the-badge&logo=adobepremierepro&logoColor=white)](https://www.adobe.com/products/premiere.html)
 [![Gemini Nano Banana](https://img.shields.io/badge/Gemini%20Nano%20Banana-4285F4.svg?style=for-the-badge&logo=google%20gemini&logoColor=white)](https://gemini.google)
+
+---
+
+<div align="center">
+<img src="./rak.svg" width="160" alt="Rak">
+
+**Check out my programming language that my friend and I are building** — [Rak](https://github.com/Louiml/Rak) 🚀
+</div>
 
 ---
 
