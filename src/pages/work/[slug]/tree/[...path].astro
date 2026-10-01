@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import RepoBrowser from '../../../../components/RepoBrowser.astro';
+import { projects } from '../../../../data/content';
+import * as R from '../../../../lib/repos';
+
+interface Props {
+  slug: string;
+  nodePath: string;
+}
+
+export async function getStaticPaths() {
+  await R.ensureReposLoaded();
+  return projects.flatMap((project) => {
+    const tree = R.getRepoTree(project.slug);
+    if (!tree) return [];
+    return R.renderableDirs(tree).map((dir) => ({
+      params: { slug: project.slug, path: dir.path },
+      props: { slug: project.slug, nodePath: dir.path },
+    }));
+  });
+}
+
+const { slug, nodePath } = Astro.props;
+await R.ensureReposLoaded();
+
+const project = projects.find((p) => p.slug === slug)!;
+const meta = R.getMeta(slug);
+const branch = meta.branch;
+const repo = R.repoNameFromUrl(project.url!);
+const ownerRepo = meta.available
+  ? meta.slug
+  : `${R.ownerRepoFromUrl(project.url!).owner}/${repo}`;
+const updated = R.relativeUpdated(R.updatedAtFor(slug));
+const tree = R.getRepoTree(slug);
+const node = tree ? R.findNode(tree, nodePath) : null;
+const segs = nodePath.split('/');
+const localDirs = new Set(tree ? R.renderableDirs(tree).map((d) => d.path) : []);
+
+function dirHref(depth: number): { href: string; external: boolean } {
+  const dirPath = segs.slice(0, depth + 1).join('/');
+  return localDirs.has(dirPath)
+    ? { href: `/work/${slug}/tree/${dirPath}/`, external: false }
+    : { href: R.ghTreeUrl(ownerRepo, branch, dirPath), external: true };
+}
+---
+
+<BaseLayout
+  title={`${repo} · ${segs[segs.length - 1]} — Work`}
+  description={`${nodePath} in ${project.title} — ${project.summary}`}
+>
+  <section class="container">
+    <header class="head">
+      <a class="back" href={`/work/${slug}/`}><span aria-hidden="true">←</span> {repo}</a>
+      <h1 class="crumb">
+        <a class="crumb-repo" href={`/work/${slug}/`}>{repo}</a>
+        {segs.map((seg, i) => (
+          <Fragment>
+            <span class="sep" aria-hidden="true">/</span>
+            {i === segs.length - 1 ? (
+              <span class="seg current">{seg}</span>
+            ) : (
+              <a class="seg" href={dirHref(i).href} {...(dirHref(i).external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{seg}</a>
+            )}
+          </Fragment>
+        ))}
+      </h1>
+    </header>
+    {node && tree ? (
+      <RepoBrowser project={project} branch={branch} ownerRepo={ownerRepo} node={node} tree={tree} isRoot={false} updated={updated} />
+    ) : (
+      <p class="missing">
+        This directory is not available here — <a href={R.ghTreeUrl(ownerRepo, branch, nodePath)}>view it on GitHub ↗</a>.
+      </p>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .head {
+    padding-block: 4rem 2rem;
+  }
+
+  .back {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 120ms ease;
+  }
+
+  .back:hover,
+  .back:focus-visible {
+    color: var(--accent);
+  }
+
+  .crumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  }
+
+  .crumb-repo {
+    text-decoration: none;
+    transition: color 120ms ease;
+  }
+
+  .crumb-repo:hover,
+  .crumb-repo:focus-visible {
+    color: var(--accent);
+  }
+
+  .sep {
+    color: var(--muted);
+    font-size: 0.75em;
+  }
+
+  .seg {
+    text-decoration: none;
+    color: var(--accent);
+  }
+
+  .seg.current {
+    color: var(--ink);
+  }
+
+  .missing {
+    color: var(--muted);
+    border: 1px dashed var(--line);
+    padding: 2rem;
+  }
+
+  .missing a {
+    color: var(--accent);
+  }
+</style>

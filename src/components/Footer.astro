@@ -1,0 +1,57 @@
+---
+import { site } from '../data/content';
+
+const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(new Date());
+---
+
+<footer class="site-footer">
+  <div class="container inner">
+    <p class="mono-label">© {year} {site.name}{site.location && <span> — {site.location}</span>}</p>
+    <ul class="links">
+      {
+        site.links.map((l) => (
+          <li>
+            <a href={l.href}>{l.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--line);
+    padding-block: 2rem;
+    margin-top: 5rem;
+  }
+
+  .inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .links a {
+    font-size: 0.95rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 120ms ease;
+  }
+
+  .links a:hover,
+  .links a:focus-visible {
+    color: var(--ink);
+  }
+</style>

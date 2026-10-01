@@ -1,0 +1,90 @@
+---
+import type { Project } from '../data/content';
+import * as R from '../lib/repos';
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+const num = String(index + 1).padStart(2, '0');
+const updated = R.relativeUpdated(R.updatedAtFor(project.slug));
+---
+
+<li class="row">
+  <a class="row-link" href={`/work/${project.slug}/`}>
+    <span class="row-num" aria-hidden="true">{num}</span>
+    <span class="row-title">{project.title}</span>
+    <span class="row-summary">{R.summaryFor(project)}</span>
+    <span class="row-meta">
+      <span>{project.role}</span>
+      <span>{updated ?? R.yearFor(project)}</span>
+    </span>
+  </a>
+</li>
+
+<style>
+  .row-link {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1.1fr) minmax(0, 1.6fr) auto;
+    align-items: baseline;
+    gap: 1.5rem;
+    padding-block: 1.4rem;
+    border-top: 1px solid var(--line);
+    text-decoration: none;
+  }
+
+  .row:last-child .row-link {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .row-num {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .row-title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    line-height: 1.2;
+    min-width: 0;
+    transition: transform 180ms ease, color 180ms ease;
+    transform-origin: left center;
+  }
+
+  .row-link:hover .row-title,
+  .row-link:focus-visible .row-title {
+    transform: translateX(6px);
+    color: var(--accent);
+  }
+
+  .row-summary {
+    color: var(--muted);
+    font-size: 0.95rem;
+    min-width: 0;
+  }
+
+  .row-meta {
+    display: flex;
+    gap: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    .row-link {
+      grid-template-columns: 2rem 1fr auto;
+      gap: 0.75rem;
+    }
+
+    .row-summary {
+      grid-column: 2 / -1;
+    }
+  }
+</style>

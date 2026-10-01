@@ -1,0 +1,183 @@
+---
+import { site } from '../data/content';
+
+const path = Astro.url.pathname;
+const isWork = path === '/work' || path.startsWith('/work/');
+const isHome = path === '/';
+---
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/" aria-current={isHome ? 'page' : undefined}>
+      {site.name}<span class="brand-dot" aria-hidden="true">.</span>
+    </a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="/work" aria-current={isWork ? 'page' : undefined}>Work</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button
+      id="theme-toggle"
+      type="button"
+      aria-pressed="false"
+      title="Toggle dark mode"
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.25"
+        aria-hidden="true"
+      >
+        <circle cx="8" cy="8" r="6.25"></circle>
+        <path d="M8 1.75a6.25 6.25 0 0 1 0 12.5Z" fill="currentColor" stroke="none"></path>
+      </svg>
+      <span class="sr-only">Dark Mode</span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 1px solid var(--line);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    min-height: 3.75rem;
+  }
+
+  .brand {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    transition: color 120ms ease;
+  }
+
+  .brand:hover,
+  .brand:focus-visible {
+    color: var(--accent);
+  }
+
+  .brand-dot {
+    color: var(--accent);
+  }
+
+  nav {
+    margin-left: auto;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  nav a {
+    display: inline-block;
+    padding-block: 0.4rem;
+    font-size: 0.95rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 120ms ease;
+  }
+
+  nav a:hover,
+  nav a:focus-visible {
+    color: var(--ink);
+  }
+
+  nav a[aria-current='page'] {
+    color: var(--ink);
+  }
+
+  #theme-toggle {
+    display: grid;
+    place-items: center;
+    /* 44px keeps this a comfortable touch target. */
+    width: 2.75rem;
+    height: 2.75rem;
+    flex: none;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    transition: color 120ms ease, border-color 120ms ease;
+  }
+
+  #theme-toggle:hover,
+  #theme-toggle:focus-visible {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  @media (max-width: 480px) {
+    .bar {
+      gap: 0.75rem;
+    }
+
+    .brand {
+      font-size: 1rem;
+    }
+
+    nav ul {
+      gap: 0.9rem;
+    }
+
+    nav a {
+      font-size: 0.85rem;
+    }
+
+    #theme-toggle {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+</style>
+
+<script>
+  const root = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  const system = window.matchMedia('(prefers-color-scheme: dark)');
+
+  const isDark = () => {
+    const t = root.getAttribute('data-theme');
+    return (
+      t === 'dark' ||
+      (t === null && system.matches)
+    );
+  };
+
+  const sync = () => btn?.setAttribute('aria-pressed', String(isDark()));
+  sync();
+
+  btn?.addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('theme', next);
+    } catch {
+      /* localStorage unavailable — theme applies for this page view only */
+    }
+    sync();
+  });
+
+  // Keep the pressed state honest when the OS theme changes and the visitor
+  // has not made an explicit choice.
+  system.addEventListener('change', () => {
+    if (root.getAttribute('data-theme') === null) sync();
+  });
+</script>

@@ -1,0 +1,383 @@
+/* ---------------------------------------------------------------------------
+   Global styles — design tokens, reset, shared primitives.
+   Component-specific styles live scoped inside each .astro file.
+--------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  --bg: #f5f2ea;
+  --soft: #ece7da;
+  --ink: #191712;
+  --muted: #6f6a5b;
+  --accent: #bf4109;
+  --line: #dcd5c4;
+
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+
+    --bg: #101013;
+    --soft: #1a1a1f;
+    --ink: #eae6da;
+    --muted: #9a958a;
+    --accent: #ff7a3d;
+    --line: #2b2b31;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #101013;
+  --soft: #1a1a1f;
+  --ink: #eae6da;
+  --muted: #9a958a;
+  --accent: #ff7a3d;
+  --line: #2b2b31;
+}
+
+/* Reset ------------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+main {
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Focus ------------------------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Shared primitives -------------------------------------------------------- */
+
+.container {
+  width: min(100% - 3rem, 68rem);
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* The header is sticky and 3.75rem tall, so every scroll target — including
+   keyboard-focused elements — needs to clear it. */
+html {
+  scroll-padding-top: 5rem;
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Visible to assistive tech only. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.prose p {
+  max-width: 62ch;
+}
+
+.prose p + p {
+  margin-top: 1em;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--soft);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+}
+
+/* Motion ------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Markdown (README) --------------------------------------------------------- */
+
+.md {
+  font-size: 1rem;
+  overflow-wrap: break-word;
+}
+
+.md > :first-child {
+  margin-top: 0;
+}
+
+.md h1,
+.md h2,
+.md h3,
+.md h4 {
+  margin: 1.5em 0 0.6em;
+}
+
+.md h1,
+.md h2 {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.3em;
+}
+
+.md p,
+.md ul,
+.md ol {
+  margin-block: 0.8em;
+}
+
+.md ul,
+.md ol {
+  padding-left: 1.5em;
+}
+
+.md li + li {
+  margin-top: 0.25em;
+}
+
+.md a {
+  color: var(--accent);
+}
+
+.md img {
+  max-width: 100%;
+  height: auto;
+}
+
+.md blockquote {
+  margin-block: 0.8em;
+  border-left: 3px solid var(--line);
+  padding-left: 1rem;
+  color: var(--muted);
+}
+
+.md pre {
+  margin-block: 0.8em;
+  padding: 1rem;
+  background: var(--soft);
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.md pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+.md table {
+  border-collapse: collapse;
+  margin-block: 0.8em;
+  display: block;
+  overflow-x: auto;
+}
+
+.md th,
+.md td {
+  border: 1px solid var(--line);
+  padding: 0.4em 0.8em;
+}
+
+.md hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin-block: 1.5em;
+}
+
+/* Code viewer (blob pages) --------------------------------------------------- */
+
+.code-view {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--soft);
+  overflow: hidden;
+}
+
+.code-view pre {
+  margin: 0;
+  padding: 0.75rem 0;
+  background: transparent !important;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  counter-reset: line;
+}
+
+/* Shiki stamps its background inline; pull it back to the site surface so the
+   code block stays seamless with the surrounding panel in both themes. */
+.code-view pre.shiki {
+  background-color: var(--soft) !important;
+}
+
+.code-view .line {
+  display: block;
+  min-height: 1.55em;
+  padding-left: 4rem;
+  position: relative;
+  counter-increment: line;
+  white-space: pre;
+}
+
+.code-view .line::before {
+  content: counter(line);
+  position: absolute;
+  left: 0;
+  width: 3rem;
+  padding-right: 1.25rem;
+  text-align: right;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}
+
+/* Shiki dual-theme output — swap token colors when dark mode is active.
+   `highlightCode` calls Shiki's `codeToHtml` directly, which emits
+   `pre.shiki` with `--shiki-dark*` custom properties (NOT Astro's
+   `.astro-code` wrapper class, which this site never renders). */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .code-view pre.shiki,
+  :root:not([data-theme='light']) .code-view pre.shiki span {
+    color: var(--shiki-dark) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}
+
+:root[data-theme='dark'] .code-view pre.shiki,
+:root[data-theme='dark'] .code-view pre.shiki span {
+  color: var(--shiki-dark) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}

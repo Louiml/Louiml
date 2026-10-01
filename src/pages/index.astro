@@ -1,0 +1,190 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectRow from '../components/ProjectRow.astro';
+import { site } from '../data/content';
+import * as R from '../lib/repos';
+
+await R.ensureReposLoaded();
+
+// The four most recently pushed repos, straight from GitHub.
+const all = R.sortedProjects();
+const featured = all.slice(0, 4);
+---
+
+<BaseLayout title={`${site.name} — ${site.discipline}`}>
+  <section class="hero container" aria-labelledby="hero-title">
+    <p class="mono-label">{[site.discipline, site.location].filter(Boolean).join(' · ')}</p>
+    <h1 id="hero-title">{site.name}</h1>
+    <p class="intro">{site.intro}</p>
+    <p class="availability">
+      <span class="dot" aria-hidden="true"></span>
+      {site.availability}
+    </p>
+  </section>
+
+  <section id="work" class="container section" aria-labelledby="work-title">
+    <div class="section-head">
+      <h2 id="work-title">Selected Work</h2>
+      <a class="see-all" href="/work">
+        All&nbsp;{all.length}&nbsp;Projects <span aria-hidden="true">→</span>
+      </a>
+    </div>
+    {
+      featured.length === 0 ? (
+        <p class="empty">
+          Projects will appear here — add entries to <code>src/data/content.ts</code>.
+        </p>
+      ) : (
+        <ol class="rows">
+          {featured.map((project, i) => (
+            <ProjectRow project={project} index={i} />
+          ))}
+        </ol>
+      )
+    }
+  </section>
+
+  <section id="about" class="container section" aria-labelledby="about-title">
+    <h2 id="about-title">About</h2>
+    <div class="prose">
+      {site.about.map((par) => <p>{par}</p>)}
+    </div>
+  </section>
+
+  <section id="contact" class="container section" aria-labelledby="contact-title">
+    <h2 id="contact-title">Let’s Work Together</h2>
+    <p class="contact-lede prose">
+      {site.availability} — the fastest way to start is a short email saying what you
+      are building and when you need it live.
+    </p>
+    <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
+    <ul class="contact-links">
+      {
+        site.links.map((l) => (
+          <li>
+            <a href={l.href} target="_blank" rel="noopener noreferrer">
+              {l.label} <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: 6rem 4rem;
+  }
+
+  .hero h1 {
+    margin-top: 1rem;
+  }
+
+  .intro {
+    margin-top: 1.5rem;
+    max-width: 46ch;
+    font-size: 1.2rem;
+  }
+
+  .availability {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--accent);
+    flex: none;
+  }
+
+  .section {
+    padding-block: 3.5rem;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .see-all {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 120ms ease;
+  }
+
+  .see-all:hover,
+  .see-all:focus-visible {
+    color: var(--accent);
+  }
+
+  .rows {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .empty {
+    color: var(--muted);
+    border: 1px dashed var(--line);
+    padding: 2rem;
+  }
+
+  .contact-lede {
+    margin-top: 1.25rem;
+    color: var(--muted);
+  }
+
+  .email {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+    transition: text-decoration-color 120ms ease, color 120ms ease;
+  }
+
+  .email:hover,
+  .email:focus-visible {
+    color: var(--accent);
+    text-decoration-color: currentColor;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .contact-links a {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 120ms ease;
+  }
+
+  .contact-links a:hover,
+  .contact-links a:focus-visible {
+    color: var(--ink);
+  }
+</style>

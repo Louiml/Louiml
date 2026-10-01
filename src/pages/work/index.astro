@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectRow from '../../components/ProjectRow.astro';
+import * as R from '../../lib/repos';
+
+await R.ensureReposLoaded();
+
+// Ordered by live GitHub push date — newest first. See R.sortedProjects().
+const ordered = R.sortedProjects();
+---
+
+<BaseLayout
+  title="Work"
+  description={`${ordered.length} projects — programming languages, AI experiments, and desktop tools, newest first.`}
+>
+  <section class="container">
+    <header class="head">
+      <p class="mono-label">Index</p>
+      <h1>Work</h1>
+      <p class="count">{ordered.length}&nbsp;Projects · newest first</p>
+    </header>
+    {
+      ordered.length === 0 ? (
+        <p class="empty">
+          Nothing here yet — add entries to <code>src/data/content.ts</code>.
+        </p>
+      ) : (
+        <ol class="rows">
+          {ordered.map((project, i) => (
+            <ProjectRow project={project} index={i} />
+          ))}
+        </ol>
+      )
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .head {
+    padding-block: 4.5rem 2.5rem;
+  }
+
+  .head h1 {
+    margin-top: 0.75rem;
+  }
+
+  .count {
+    margin-top: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+  }
+
+  .rows {
+    margin: 0 0 4rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .empty {
+    color: var(--muted);
+    border: 1px dashed var(--line);
+    padding: 2rem;
+  }
+</style>

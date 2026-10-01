@@ -1,0 +1,263 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RepoBrowser from '../../components/RepoBrowser.astro';
+import * as R from '../../lib/repos';
+
+export async function getStaticPaths() {
+  await R.ensureReposLoaded();
+  // Use the live order so the prev/next pager matches the /work index.
+  return R.sortedProjects().map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const ordered = R.sortedProjects();
+const index = ordered.findIndex((p) => p.slug === project.slug);
+const prev = ordered[index - 1];
+const next = ordered[index + 1];
+
+await R.ensureReposLoaded();
+
+const meta = R.getMeta(project.slug);
+const branch = meta.branch;
+const repo = R.repoNameFromUrl(project.url!);
+const ownerRepo = meta.available ? meta.slug : `${R.ownerRepoFromUrl(project.url!).owner}/${repo}`;
+const tree = R.getRepoTree(project.slug);
+const readme = tree ? R.findReadme(tree) : null;
+const readmeHtml =
+  tree && readme
+    ? R.renderMarkdown(R.readFileNode(project.slug, readme), ownerRepo, branch)
+    : null;
+const updated = R.relativeUpdated(R.updatedAtFor(project.slug));
+const live = R.repoIndexFor(project.slug);
+---
+
+<BaseLayout
+  title={`${project.title} — Work`}
+  description={project.summary}
+  image={project.cover?.src}
+>
+  <article class="container">
+    <header class="head">
+      <a class="back" href="/work"><span aria-hidden="true">←</span> All Work</a>
+      <div class="repo-title">
+        <h1>{project.title}</h1>
+        <span class="chip">Public</span>
+      </div>
+      {
+        project.cover && (
+          <img
+            class="cover"
+            src={project.cover.src}
+            alt={project.cover.alt}
+            width={project.cover.width}
+            height={project.cover.height}
+            loading="lazy"
+            decoding="async"
+          />
+        )
+      }
+      <p class="summary">{R.summaryFor(project)}</p>
+      <div class="repo-stats">
+        <span class="lang">
+          <span class="lang-dot" style={`background: ${R.langColor(project.role)}`} aria-hidden="true"></span>
+          {project.role}
+        </span>
+        <span class="year">{R.yearFor(project)}</span>
+        {updated && <span class="updated">Updated&nbsp;{updated}</span>}
+        {live?.archived && <span class="tag">Archived</span>}
+        {project.tags.map((t) => <span class="tag">{t}</span>)}
+        {project.homepage && (
+          <a class="site-link" href={project.homepage} target="_blank" rel="noopener noreferrer">
+            {project.homepage.replace(/^https?:\/\//, '')} <span aria-hidden="true">↗</span>
+          </a>
+        )}
+      </div>
+      {project.body && (
+        <div class="prose body">
+          {project.body.map((par) => <p>{par}</p>)}
+        </div>
+      )}
+    </header>
+
+    {tree ? (
+      <div class="browser-wrap">
+        <RepoBrowser project={project} branch={branch} ownerRepo={ownerRepo} node={tree} tree={tree} isRoot={true} updated={updated} />
+        {readmeHtml && (
+          <section class="readme" aria-label="README">
+            <header class="readme-head mono-label">{readme?.name}</header>
+            <div class="md" set:html={readmeHtml} />
+          </section>
+        )}
+      </div>
+    ) : (
+      <p class="unavailable">
+        Source unavailable — <a href={R.ghTreeUrl(ownerRepo, branch, '')} target="_blank" rel="noopener noreferrer">view the repository on GitHub ↗</a>.
+      </p>
+    )}
+
+    <nav class="pager" aria-label="Project Navigation">
+      {prev ? <a href={`/work/${prev.slug}/`}><span aria-hidden="true">←</span> {prev.title}</a> : <span></span>}
+      {next ? <a href={`/work/${next.slug}/`}>{next.title} <span aria-hidden="true">→</span></a> : <span></span>}
+    </nav>
+  </article>
+</BaseLayout>
+
+<style>
+  .head {
+    padding-block: 4rem 2.5rem;
+  }
+
+  .back {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 120ms ease;
+  }
+
+  .back:hover,
+  .back:focus-visible {
+    color: var(--accent);
+  }
+
+  .repo-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .cover {
+    width: 100%;
+    height: auto;
+    margin-top: 1.75rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+
+  .summary {
+    margin-top: 1rem;
+    max-width: 52ch;
+    font-size: 1.15rem;
+  }
+
+  .repo-stats {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.9rem;
+    margin-top: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .lang-dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    flex: none;
+  }
+
+  .year {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .updated {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tag {
+    padding: 0.18rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+
+  .site-link {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .site-link:hover,
+  .site-link:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .body {
+    margin-top: 1.25rem;
+    color: var(--muted);
+  }
+
+  .browser-wrap {
+    margin-top: 1rem;
+  }
+
+  .readme {
+    margin-top: 2rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .readme-head {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--line);
+    background: var(--soft);
+  }
+
+  .readme .md {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .unavailable {
+    color: var(--muted);
+    border: 1px dashed var(--line);
+    padding: 2rem;
+  }
+
+  .unavailable a {
+    color: var(--accent);
+  }
+
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-block: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .pager a {
+    font-size: 0.95rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 120ms ease;
+  }
+
+  .pager a:hover,
+  .pager a:focus-visible {
+    color: var(--ink);
+  }
+</style>

@@ -1,0 +1,241 @@
+---
+import type { Project } from '../data/content';
+import * as R from '../lib/repos';
+
+interface Props {
+  project: Project;
+  branch: string;
+  /** "owner/repo" — used for every outbound GitHub link. */
+  ownerRepo: string;
+  /** Directory node to list (repo root or a subdirectory). */
+  node: R.TreeNode;
+  tree: R.TreeNode;
+  isRoot: boolean;
+  /** Relative "updated" label from the repo's last push, when known. */
+  updated?: string | null;
+}
+
+const { project, branch, ownerRepo, node, tree, isRoot, updated = null } = Astro.props;
+const entries = R.sortedEntries(node);
+const localDirs = new Set(R.renderableDirs(tree).map((d) => d.path));
+const localFiles = new Set(R.renderableFiles(tree).map((f) => f.path));
+const parentPath = node.path ? node.path.split('/').slice(0, -1).join('/') : '';
+const parentHref = isRoot
+  ? '#'
+  : parentPath
+    ? `/work/${project.slug}/tree/${parentPath}/`
+    : `/work/${project.slug}/`;
+
+function hrefFor(entry: R.TreeNode): { href: string; external: boolean } {
+  if (entry.type === 'dir') {
+    return localDirs.has(entry.path)
+      ? { href: `/work/${project.slug}/tree/${entry.path}/`, external: false }
+      : { href: R.ghTreeUrl(ownerRepo, branch, entry.path), external: true };
+  }
+  return localFiles.has(entry.path)
+    ? { href: `/work/${project.slug}/blob/${entry.path}`, external: false }
+    : { href: R.ghBlobUrl(ownerRepo, branch, entry.path), external: true };
+}
+
+const folderIcon = '<path d="M1.75 1A1.75 1.75 0 0 0 0 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0 0 16 13.25v-8.5A1.75 1.75 0 0 0 14.25 3H7.5a.25.25 0 0 1-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75Z"></path>';
+const fileIcon = '<path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm8.5-.25v2.75c0 .138.112.25.25.25h2.75a.25.25 0 0 0 .25-.25L10.5 1.5Z"></path>';
+---
+
+<div class="browser">
+  <div class="browser-head">
+    <span class="branch-chip">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+        <path d="M9.5 3.25a2.25 2.25 0 1 1 3 2.122V6A2.5 2.5 0 0 1 10 8.5H6a1 1 0 0 0-1 1v1.128a2.251 2.251 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.5 0v1.836A2.492 2.492 0 0 1 6 7h4a1 1 0 0 0 1-1v-.628A2.25 2.25 0 0 1 9.5 3.25Zm-6 0a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Zm8.25-.75a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5ZM4.25 12a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"></path>
+      </svg>
+      <span>{branch}</span>
+    </span>
+    <span class="live"><span class="live-dot" aria-hidden="true"></span>Live from GitHub</span>
+    {updated && <span class="updated">Updated&nbsp;{updated}</span>}
+    <a class="gh-link" href={R.ghTreeUrl(ownerRepo, branch, node.path)} target="_blank" rel="noopener noreferrer">
+      View on GitHub <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+
+  <table>
+    <caption class="sr-only">{isRoot ? 'Repository' : node.path} contents</caption>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col" class="size">Size</th>
+      </tr>
+    </thead>
+    <tbody>
+      {!isRoot && (
+        <tr class="parent-row">
+          <td colspan="2">
+            <a class="entry" href={parentHref}>
+              <svg class="icon-folder" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" set:html={folderIcon} />
+              <span class="entry-name">..</span>
+              <span class="sr-only">Parent directory</span>
+            </a>
+          </td>
+        </tr>
+      )}
+      {entries.map((entry) => {
+        const target = hrefFor(entry);
+        return (
+          <tr>
+            <td>
+              <a
+                class="entry"
+                href={target.href}
+                {...(target.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >
+                <svg class={entry.type === 'dir' ? 'icon-folder' : 'icon-file'} width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" set:html={entry.type === 'dir' ? folderIcon : fileIcon} />
+                <span class="entry-name">{entry.name}</span>
+                {entry.type === 'dir' && <span class="sr-only">, directory</span>}
+              </a>
+            </td>
+            <td class="size">{entry.type === 'file' ? R.fmtSize(entry.size) : ''}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .browser {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .browser-head {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.6rem 1rem;
+    background: var(--soft);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+
+  .branch-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--accent);
+  }
+
+  .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.68rem;
+  }
+
+  .live-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: #2ea043;
+    flex: none;
+  }
+
+  .updated {
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .gh-link {
+    margin-left: auto;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 120ms ease;
+  }
+
+  .gh-link:hover,
+  .gh-link:focus-visible {
+    color: var(--ink);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th {
+    padding: 0.4rem 1rem;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--soft);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  th.size {
+    text-align: right;
+  }
+
+  td {
+    padding: 0.4rem 1rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.9rem;
+  }
+
+  tbody tr:first-child td {
+    border-top: none;
+  }
+
+  tr:hover td,
+  tr:focus-within td {
+    background: var(--soft);
+  }
+
+  .entry {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    min-width: 0;
+  }
+
+  .entry-name {
+    overflow-wrap: anywhere;
+  }
+
+  a.entry:hover .entry-name,
+  a.entry:focus-visible .entry-name {
+    color: var(--accent);
+  }
+
+  .parent-row .entry {
+    color: var(--muted);
+  }
+
+  .icon-folder {
+    color: #54aeff;
+    flex: none;
+  }
+
+  .icon-file {
+    color: var(--muted);
+    flex: none;
+  }
+
+  .size {
+    width: 6rem;
+    text-align: right;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+</style>

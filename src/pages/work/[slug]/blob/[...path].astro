@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { projects } from '../../../../data/content';
+import * as R from '../../../../lib/repos';
+import { highlightCode } from '../../../../lib/highlight';
+
+interface Props {
+  slug: string;
+  nodePath: string;
+}
+
+export async function getStaticPaths() {
+  await R.ensureReposLoaded();
+  return projects.flatMap((project) => {
+    const tree = R.getRepoTree(project.slug);
+    if (!tree) return [];
+    return R.renderableFiles(tree).map((file) => ({
+      params: { slug: project.slug, path: file.path },
+      props: { slug: project.slug, nodePath: file.path },
+    }));
+  });
+}
+
+const { slug, nodePath } = Astro.props;
+await R.ensureReposLoaded();
+
+const project = projects.find((p) => p.slug === slug)!;
+const meta = R.getMeta(slug);
+const branch = meta.branch;
+const repo = R.repoNameFromUrl(project.url!);
+const ownerRepo = meta.available
+  ? meta.slug
+  : `${R.ownerRepoFromUrl(project.url!).owner}/${repo}`;
+const tree = R.getRepoTree(slug);
+const node = tree ? R.findNode(tree, nodePath) : null;
+
+const code = node ? R.readFileNode(slug, node).replace(/\r\n/g, '\n') : '';
+const highlighted =
+  node && node.size <= R.MAX_HIGHLIGHT_BYTES
+    ? await highlightCode(code, R.langForFile(node.name))
+    : '';
+const codeHtml = highlighted || R.plainCodeBlock(code);
+const lineCount = code ? code.split('\n').length : 0;
+
+const segs = nodePath.split('/');
+const localDirs = new Set(tree ? R.renderableDirs(tree).map((d) => d.path) : []);
+const githubFileUrl = R.ghBlobUrl(ownerRepo, branch, nodePath);
+
+function dirHref(depth: number): { href: string; external: boolean } {
+  const dirPath = segs.slice(0, depth + 1).join('/');
+  return localDirs.has(dirPath)
+    ? { href: `/work/${slug}/tree/${dirPath}/`, external: false }
+    : { href: R.ghTreeUrl(ownerRepo, branch, dirPath), external: true };
+}
+---
+
+<BaseLayout
+  title={`${repo} · ${segs[segs.length - 1]} — Work`}
+  description={`Source of ${nodePath} in ${project.title} — ${project.summary}`}
+>
+  <section class="container">
+    <header class="head">
+      <a class="back" href={`/work/${slug}/`}><span aria-hidden="true">←</span> {repo}</a>
+      <h1 class="crumb">
+        <a class="crumb-repo" href={`/work/${slug}/`}>{repo}</a>
+        {segs.slice(0, -1).map((seg, i) => (
+          <Fragment>
+            <span class="sep" aria-hidden="true">/</span>
+            <a class="seg" href={dirHref(i).href} {...(dirHref(i).external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{seg}</a>
+          </Fragment>
+        ))}
+        <span class="sep" aria-hidden="true">/</span>
+        <span class="seg current">{segs[segs.length - 1]}</span>
+      </h1>
+      <p class="file-meta mono-label">
+        <span>{R.fmtSize(node?.size ?? 0)}</span>
+        <span aria-hidden="true">·</span>
+        <span>{lineCount}&nbsp;lines</span>
+        <a href={R.ghRawUrl(ownerRepo, branch, nodePath)} target="_blank" rel="noopener noreferrer">Raw ↗</a>
+        <a href={githubFileUrl} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </p>
+    </header>
+
+    {node ? (
+      <div class="code-view" set:html={codeHtml} />
+    ) : (
+      <p class="missing">
+        This file is not part of the local snapshot — <a href={githubFileUrl}>view it on GitHub ↗</a>.
+      </p>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .head {
+    padding-block: 4rem 2rem;
+  }
+
+  .back {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 120ms ease;
+  }
+
+  .back:hover,
+  .back:focus-visible {
+    color: var(--accent);
+  }
+
+  .crumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    font-size: clamp(1.3rem, 3.2vw, 2rem);
+  }
+
+  .crumb-repo {
+    text-decoration: none;
+    transition: color 120ms ease;
+  }
+
+  .crumb-repo:hover,
+  .crumb-repo:focus-visible {
+    color: var(--accent);
+  }
+
+  .sep {
+    color: var(--muted);
+    font-size: 0.75em;
+  }
+
+  .seg {
+    text-decoration: none;
+    color: var(--accent);
+  }
+
+  .seg.current {
+    color: var(--ink);
+  }
+
+  .file-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .file-meta a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .file-meta a:hover,
+  .file-meta a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .missing {
+    color: var(--muted);
+    border: 1px dashed var(--line);
+    padding: 2rem;
+  }
+
+  .missing a {
+    color: var(--accent);
+  }
+</style>
