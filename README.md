@@ -24,33 +24,6 @@ Developer and builder focused on software, cybersecurity, AI, and web developmen
   <img src="https://skillicons.dev/icons?i=html" height="50" alt="HTML" />
   <img src="https://skillicons.dev/icons?i=css" height="50" alt="CSS" />
 </p>
-
-## Projects
-
-### Rak
-
-A general-purpose programming language mainly designed for cybersecurity use.
-
-[View Rak](https://github.com/louiml/Rak)
-
-### Ryuzaki
-
-Software for OSINT and reconnaissance, designed for both cybersecurity beginners and experienced users.
-
-[Learn more](https://ryuzaki.agamiz.com)
-
-### AgamizCinema
-
-A web platform built with TypeScript.
-
-[View AgamizCinema](https://github.com/louiml/AgamizCinema)
-
-### RyuMusic
-
-A media player built around the YouTube Music API, with support for using it as an iPhone home-screen application.
-
-[View RyuMusic](https://github.com/louiml/RyuMusic)
-
 ## Website
 
 [agamiz.com](https://agamiz.com)
